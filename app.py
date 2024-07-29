@@ -9,6 +9,9 @@ st.set_page_config(layout="wide")
 # Set up the API key
 genai.configure(api_key='AIzaSyAGho3ZFXiX_gguR5GhhtztKTgr0iHLqlg')
 
+# Global variable for the model
+model = None
+
 @st.cache_resource
 def load_gemini_model():
     return genai.GenerativeModel('gemini-pro')
@@ -18,13 +21,18 @@ def load_data():
     return pd.read_csv('data.csv')  # Replace with your actual file path
 
 def generate_content(prompt):
+    global model
     response = model.generate_content(prompt)
     return response.text
 
 def main():
+    global model
+    
     st.title("Civic Response Assistant Dashboard")
 
+    # Initialize the model
     model = load_gemini_model()
+    
     df = load_data()
 
     st.header("Disaster Information and Summary")
