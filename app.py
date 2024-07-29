@@ -5,8 +5,8 @@ import pandas as pd
 
 # Set up the API key
 #os.environ['GOOGLE_API_KEY'] = 'your_api_key_here'
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyAGho3ZFXiX_gguR5GhhtztKTgr0iHLqlg'
-genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
+#os.environ['GOOGLE_API_KEY'] = 'AIzaSyAGho3ZFXiX_gguR5GhhtztKTgr0iHLqlg'
+genai.configure(api_key='AIzaSyAGho3ZFXiX_gguR5GhhtztKTgr0iHLqlg')
 
 @st.cache_resource
 def load_gemini_model():
