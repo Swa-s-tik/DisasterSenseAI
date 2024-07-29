@@ -3,17 +3,16 @@ import google.generativeai as genai
 import os
 import pandas as pd
 
+# Set up the page config at the very beginning
+st.set_page_config(layout="wide")
+
 # Set up the API key
-#os.environ['GOOGLE_API_KEY'] = 'your_api_key_here'
-#os.environ['GOOGLE_API_KEY'] = 'AIzaSyAGho3ZFXiX_gguR5GhhtztKTgr0iHLqlg'
 genai.configure(api_key='AIzaSyAGho3ZFXiX_gguR5GhhtztKTgr0iHLqlg')
 
 @st.cache_resource
 def load_gemini_model():
     return genai.GenerativeModel('gemini-pro')
-model = load_gemini_model()
 
-# Load the dataset
 @st.cache_data
 def load_data():
     return pd.read_csv('data.csv')  # Replace with your actual file path
@@ -23,9 +22,9 @@ def generate_content(prompt):
     return response.text
 
 def main():
-    st.set_page_config(layout="wide")
     st.title("Civic Response Assistant Dashboard")
 
+    model = load_gemini_model()
     df = load_data()
 
     st.header("Disaster Information and Summary")
